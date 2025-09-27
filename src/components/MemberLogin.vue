@@ -48,6 +48,13 @@ export default {
     return {
       email: "",
       password: "",
+      googleUrl: "https://accounts.google.com/o/oauth2/auth",
+      googleClientId:
+        "23640695977-gtrcdkhuv1as8fn0jie882lc5f05cjbp.apps.googleusercontent.com",
+      googleRedirectUrl: "http://localhost:3000/oauth/google/redirect",
+      // openid는 요청하지않아도 기본적으로 제공, email, pofile은 요청시 제공
+      googleScope: "openid email profile",
+      googleResponseType: "code",
     };
   },
   methods: {
@@ -64,7 +71,10 @@ export default {
       localStorage.setItem("token", token);
       window.location.href = "/";
     },
-    googleLogin() {},
+    googleLogin() {
+      const auth_uri = `${this.googleUrl}?client_id=${this.googleClientId}&redirect_uri=${this.googleRedirectUrl}&response_type=${this.googleResponseType}&scope=${this.googleScope}`;
+      window.location.href = auth_uri;
+    },
     kakaoLogin() {},
   },
 };
