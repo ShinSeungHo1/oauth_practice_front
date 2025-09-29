@@ -1,5 +1,5 @@
 <template>
-  <div>구글 로그인 진행중...</div>
+  <div>카카오 로그인 진행중...</div>
 </template>
 
 <script>
@@ -12,10 +12,12 @@ export default {
   },
   methods: {
     async sendCodeToServer(code) {
+      console.log(code);
       const response = await axios.post(
-        "http://localhost:8080/member/google/doLogin",
+        "http://localhost:8080/member/kakao/doLogin",
         { code }
       );
+
       const token = response.data.token;
       localStorage.setItem("token", token);
       window.location.href = "/";
